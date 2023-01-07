@@ -6,8 +6,15 @@ function App() {
   const [feladat, setFeladat] = useState("");
 
   const feladatHozzaadasa = () => {
+    const feladatSzerepele = [];
+    teendok.forEach(bejegyzes => {
+      feladatSzerepele.push(
+        bejegyzes.feladat
+      )
+    });
+
     if (feladat != "") {
-      if (teendok.includes(feladat)) {
+      if (feladatSzerepele.includes(feladat)) {
         alert("A feladat már szerepel a teendők között!");
       } else {
         const bejegyzes = {
@@ -17,6 +24,7 @@ function App() {
         teendok.forEach(bejegyzes => ujTeendok.push(bejegyzes))
         ujTeendok.push(bejegyzes);
         setTeendok(ujTeendok);
+        setFeladat("");
       }
     } else {
       alert("Nincs megadva feladat!");
