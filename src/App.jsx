@@ -6,21 +6,32 @@ function App() {
   const [feladat, setFeladat] = useState("");
 
   const feladatHozzaadasa = () => {
-    const bejegyzes = {
-      feladat: feladat
-    };
-    const ujTeendok = [];
-    teendok.forEach(bejegyzes => ujTeendok.push(bejegyzes))
-    ujTeendok.push(bejegyzes);
-    setTeendok(ujTeendok);
+    if (feladat != "") {
+      if (teendok.includes(feladat)) {
+        alert("A feladat már szerepel a teendők között!");
+      } else {
+        const bejegyzes = {
+          feladat: feladat
+        };
+        const ujTeendok = [];
+        teendok.forEach(bejegyzes => ujTeendok.push(bejegyzes))
+        ujTeendok.push(bejegyzes);
+        setTeendok(ujTeendok);
+      }
+    } else {
+      alert("Nincs megadva feladat!");
+    }
   };
 
   const teendoLista = [];
   teendok.forEach(bejegyzes => {
-    teendoLista.push(<div>
-      <input type="checkbox" />
-      {bejegyzes.feladat}
-    </div>)
+    teendoLista.push(
+      <div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" />
+        {bejegyzes.feladat}
+      </div>
+    )
   });
 
   return (
@@ -33,6 +44,7 @@ function App() {
         </div>
         <div>
           <input
+            id="text-feladat"
             type="text"
             placeholder='Feladat'
             value={feladat}
